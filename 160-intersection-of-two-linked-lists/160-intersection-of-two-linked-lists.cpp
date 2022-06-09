@@ -9,29 +9,22 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        ListNode *a=headA;
-       ListNode *b=headB;
-        int count1=0,count2=0;
-        while(headA){
-            headA=headA->next;
-            count1++;
+          ListNode* p1=headA;
+        ListNode* p2=headB;
+        while(p1!=p2){
+            if(p1==NULL){
+                p1=headB;
+            }
+            else{
+                p1=p1->next;
+            }
+            if(p2==NULL){
+                p2=headA;
+            }
+            else{
+                p2=p2->next;
+            }
         }
-        while(headB){
-            headB=headB->next;
-            count2++;
-        }
-        while(count1>count2){
-            a=a->next;
-            count1--;
-        }
-        while(count1<count2){
-            b=b->next;
-            count2--;
-        }
-        while(a!=b){
-             a=a->next;
-            b=b->next;
-        }
-        return a;
+        return p1;
     }
 };
