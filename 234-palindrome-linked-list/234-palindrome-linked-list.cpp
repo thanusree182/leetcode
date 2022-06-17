@@ -17,14 +17,14 @@ public:
         ListNode*fast=head;
         while(fast->next!=NULL && fast->next->next!=NULL){
             slow=slow->next;
-            fast=fast->next->next;
+            fast=fast->next->next; //moving slow to middle of linkedlist
         }
         slow->next=reverseList(slow->next);
-        slow=slow->next;
+        slow=slow->next;  //reversing 2nd half
         while(slow!=NULL){
             if(head->val!=slow->val)
                 return false;
-            slow=slow->next;
+            slow=slow->next;        //checking 1st half with second half
             head=head->next;
         }
         return true;
