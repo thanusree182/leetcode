@@ -39,8 +39,8 @@ class Solution
                 ans+=arr[i].value;
             }
             else{
-                int remaining=W-currWeight;
-                ans+=(arr[i].value/(double)arr[i].weight)*(double)remaining;
+                double remaining=W-currWeight;
+                ans+=(arr[i].value/(double)arr[i].weight)*remaining;
                 break;
             }
         }
