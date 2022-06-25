@@ -26,60 +26,46 @@ struct Job
 class Solution 
 {
     public:
+    //Function to find the maximum profit and the number of jobs done.
+    static bool comparison(Job a, Job b) 
+{ 
+     return (a.profit > b.profit); 
+} 
+vector<int> JobScheduling(Job arr[], int n) 
+{ 
     
-    static bool comp(Job& j1, Job& j2)
-    {
-        return j1.profit > j2.profit;
+    sort(arr, arr + n, comparison); 
+    int maxi = arr[0].dead;
+    for(int i = 1;i<n;i++) {
+        maxi = max(maxi, arr[i].dead); 
     }
     
-    
-    //Function to find the maximum profit and the number of jobs done.
-    vector<int> JobScheduling(Job arr[], int n) 
-    { 
+    int slot[maxi + 1];   
+  
+    for (int i=0; i<=maxi; i++) 
+        slot[i] = -1; 
         
-        vector<int> v;
-        int m = 0;
-        for(int i = 0; i < n; i++)
-        {
-            m = max(m, arr[i].dead);
-        }
-    
-        bool slots[m];
-        fill(slots, slots+m, false);
-    
-        sort(arr, arr + n, comp);
-    
-    
-        int profit = 0, count = 0;
-        for(int i = 0; i < n; i++)
-        {
-            int slot = arr[i].dead - 1;
-            if(slots[slot] == false)
-            {
-                slots[slot] = true;
-                count++;
-                profit += arr[i].profit;
-            }
-            else
-            {
-                while(slot >= 0)
-                {
-                    if(slots[slot] == false)
-                    {
-                        slots[slot] = true;
-                        count++;
-                        profit += arr[i].profit;
-                        break;
-                    }
-                    slot--;
-                }
-            }
-        }
-      
-    
-        return {count,profit};
+    int countJobs = 0, jobProfit = 0;
+  
+    for (int i=0; i<n; i++) 
+    { 
+       for (int j=arr[i].dead; j>0; j--) 
+       { 
+          if (slot[j]==-1) 
+          { 
+            slot[j] = i; 
+            countJobs++; 
+            jobProfit+=arr[i].profit;
+            break; 
+          } 
+       } 
     } 
+    
+    return {countJobs, jobProfit}; 
+} 
+
 };
+
 // { Driver Code Starts.
 // Driver program to test methods 
 int main() 
