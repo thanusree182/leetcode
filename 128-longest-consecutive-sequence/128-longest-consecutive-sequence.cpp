@@ -7,20 +7,7 @@
 //             int n=nums.size();
 //         int clong=1,longe=0;
 //         for(int i=0;i<n;i++){
-//             if(nums[i+1]==nums[i]){
-//               continue;
-//             }
-//             else if(nums[i+1]==nums[i]+1){
-//                clong++;
-//             }
-//             else{
-//                 longe=max(clong,longe);
-//                 clong=1;
-//             }
-//         }
-//         return max(longe,clong) ;
-//     }
-// };
+
  class Solution {
  public:
 int longestConsecutive(vector<int>& nums) {
