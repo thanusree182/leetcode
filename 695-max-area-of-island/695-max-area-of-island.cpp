@@ -1,5 +1,6 @@
 class Solution {
 public:
+    int n,m;
     int maxAreaOfIsland(vector<vector<int>>& grid) {
         n=grid.size();
         int ans=0;
@@ -13,7 +14,7 @@ public:
         return ans;
     }
  private:
-    int n,m;
+    
     int travel(int i,int j, vector<vector<int>>& grid){
         if(i < 0 || j < 0 || i >= n || j >= m || !grid[i][j])
             return 0;
