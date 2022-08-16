@@ -6,7 +6,7 @@ public:
             help[s[i]]++;
         }
         for(int i=0;i<s.length();i++){
-            if(help[s.at(i)]==1)
+            if(help[s[i]]==1)
                 return i;
         }
         
