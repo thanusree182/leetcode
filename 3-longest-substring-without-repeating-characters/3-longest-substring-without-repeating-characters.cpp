@@ -10,7 +10,6 @@ public:
                 mpp[s[r]]=r;
                 len=max(len,r-l+1);
                 r++;
-            
         }
         return len;
     }
