@@ -8,25 +8,31 @@ class Solution{
     public:
     int findSubString(string str)
     {
-        // Your code goes here  
-        set<char> s;
-        for(char ch:str)
-        s.insert(ch);
-        unordered_map<char,int> m;
-        int i=0;
-        int j=0;
-        int ans=str.length();
-        int min_length=s.size();
-        while(i<str.size()){
-            m[str[i]]++;
-            if(m.size()==min_length){
-                while(m[str[j]]>1){
-                    m[str[j]]--;
-                    j++;
+        // Your code goes here 
+        int n=str.length();
+        set <int> help;
+        for(int i=0;i<n;i++){
+            help.insert(str[i]);
+        }
+        int distinct_chars=help.size();
+        int ans=INT_MAX;
+        for(int i=0;i<n;i++){
+            int visited[256]={0};
+            int count=0;
+            int size_s=0;
+            for(int j=i;j<n;j++){
+                if(visited[str[j]]==0){
+                    count++;
+                    visited[str[j]]=1;
                 }
-                ans=min(ans,i-j+1);
+                size_s+=1;
+                if(count==distinct_chars){
+                    break;
+                }
             }
-            i++;
+            if(ans>size_s && count==distinct_chars){
+                ans=size_s;
+            }
         }
         return ans;
     }
