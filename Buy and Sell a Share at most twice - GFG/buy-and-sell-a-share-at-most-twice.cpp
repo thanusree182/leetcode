@@ -14,9 +14,9 @@ int maxProfit(vector<int>&price){
     int max_price=price[n-1],min_price=price[0];
     for(int i=n-2;i>=0;i--){
         max_price=max(max_price,price[i]);
-        profit[i]=max(profit[i+1],max_price-price[i]);
+        profit[i]=max(profit[i+1],max_price-price[i]); //by setting selling price fixed
     }
-    for(int i=1;i<n;i++){
+    for(int i=1;i<n;i++){   //by setting buying price fixed
         min_price=min(min_price,price[i]);
         profit[i]=max(profit[i-1],profit[i]+(price[i]-min_price));
     }
