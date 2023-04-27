@@ -9,7 +9,7 @@ class Solution{
     //code
     sort(a.begin(),a.end());
     int i=0;
-    int j=m-1;
+    int j=m-1;  //after sorting we check in every window of size m
     long long ans=INT_MAX;
     while(j<n){
         ans=min(ans,a[j]-a[i]);
