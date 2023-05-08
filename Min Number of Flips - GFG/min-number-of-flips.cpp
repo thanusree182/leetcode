@@ -22,6 +22,7 @@ int minFlips (string S)
 {
     // your code here
     int flips1=0,flips2=0;
+    //we will check two conditions if there is 1 at even place and 0 at odd place and viceversa
     int n=S.length();
     for(int i=0;i<n;i++){
         if(i%2==0){
