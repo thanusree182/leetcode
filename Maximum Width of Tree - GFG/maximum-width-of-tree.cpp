@@ -102,23 +102,22 @@ class Solution {
     int getMaxWidth(Node* root) {
 
         // Your code here
-        if(!root){
-            return 0;
-        }
-        int ans=1;
-        queue<Node*> q;
+        if(!root)
+        return 0;
+        queue <Node*> q;
         q.push(root);
+        int ans=-1;
         while(!q.empty()){
-            int level_size=q.size();
-            ans=max(ans,level_size);
-            for(int i=0;i<level_size;i++){
-                auto node=q.front();
+            int level=q.size();
+            ans=max(ans,level);
+            for(int i=0;i<level;i++){
+                Node* p=q.front();
                 q.pop();
-                if(node->left!=NULL){
-                    q.push(node->left);
+                if(p->left){
+                    q.push(p->left);
                 }
-                 if(node->right!=NULL){
-                    q.push(node->right);
+                if(p->right){
+                    q.push(p->right);
                 }
             }
         }
