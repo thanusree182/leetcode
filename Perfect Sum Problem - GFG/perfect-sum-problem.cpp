@@ -9,7 +9,8 @@ class Solution{
 	int mod=1e9+7;
 	int solve(int arr[],int i,int sum,vector<vector<int>>& dp){
 	   // if(sum==0)
-	   // return 1;
+	   // return 1; 
+	   //upper base case is eliminated as there can be 0 elemenets which add into sub array
 	    if(i==0){
 	        if(sum==0 && arr[0]==0){
 	            return 2;
