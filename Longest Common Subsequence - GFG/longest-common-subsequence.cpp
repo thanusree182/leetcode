@@ -9,15 +9,16 @@ using namespace std;
 class Solution
 {
     public:
+    
     //Function to find the length of longest common subsequence in two strings.
     int solve(int i,int j,string& s1,string& s2,vector<vector<int>> &dp){
-        if(i<0 || j<0){
+        if(i==0 || j==0){
             return 0;
         }
-        if(dp[i][j]!=-1){
+        if(dp[i-1][j]!=-1){
             return dp[i][j];
         }
-        if(s1[i]==s2[j]){
+        if(s1[i-1]==s2[j-1]){
             return dp[i][j]=1+solve(i-1,j-1,s1,s2,dp);
         }
         else{
@@ -27,9 +28,11 @@ class Solution
     int lcs(int x, int y, string s1, string s2)
     {
         // your code here
-        vector<vector<int>> dp  (x,vector<int>(y,-1));
-        return solve(x-1,y-1,s1,s2,dp);
+        vector<vector<int>> dp  (x+1,vector<int>(y+1,-1));
+        return solve(x,y,s1,s2,dp);
     }
+    //shift indices by 1 for writing base cases in tabulation i.e; 0--> 1 and -1-->0 etc.... 
+    // replace i by i-1 and j by j-1
 };
 
 
