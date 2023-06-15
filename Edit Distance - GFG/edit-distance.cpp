@@ -10,28 +10,29 @@ class Solution {
         // Code here
         int n=s.length();
         int m=t.length();
-        vector<vector<int>> dp(n+1,vector<int>(m+1,0));
-        for(int i=0;i<=n;i++){
-            dp[i][0]=i;
-        }
+        vector<int> curr(m+1,0);
+        vector<int> prev(m+1,0);
+        curr[0]=0;
         for(int j=0;j<=m;j++){
-            dp[0][j]=j;
+            prev[j]=j;
         }
         for(int i=1;i<=n;i++){
+            curr[0]=i;
             for(int j=1;j<=m;j++){
                   if(s[i-1]==t[j-1]){  //1 based indexing
-            dp[i][j]=dp[i-1][j-1];
+            curr[j]=prev[j-1];
         }
         else{
-            int insert=1+dp[i][j-1];
-            int delet=1+dp[i-1][j];
-            int replace=1+dp[i-1][j-1];
+            int insert=1+curr[j-1];
+            int delet=1+prev[j];
+            int replace=1+prev[j-1];
             
-             dp[i][j]=min(insert,min(delet,replace));
+             curr[j]=min(insert,min(delet,replace));
         }
             }
+            prev=curr;
         }
-        return dp[n][m];
+        return prev[m];
     }
 };
 
