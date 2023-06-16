@@ -5,28 +5,28 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
     public:
-    long long solve(int i, int sell_or_buy,vector<long long>& prices,vector<vector<long long>>& dp){
-        if(i==prices.size()){
-            return 0;
-        }
-        if(dp[i][sell_or_buy]!=-1){
-            return dp[i][sell_or_buy];
-        }
-        if(sell_or_buy==0){
-            int buy=-prices[i]+solve(i+1,1,prices,dp);
-            int not_buy=solve(i+1,0,prices,dp);
-            return dp[i][sell_or_buy]=max(buy,not_buy);
-        }
-        if(sell_or_buy==1){
-            int sell=prices[i]+solve(i+1,0,prices,dp);
-            int not_sell=solve(i+1,1,prices,dp);
-            return dp[i][sell_or_buy]=max(sell,not_sell);
-        }
-    }
+    
     long long maximumProfit(vector<long long>&prices, int n) {
         // Code here
-        vector<vector<long long>> dp(n,vector<long long>(2,-1));
-        return solve(0,0,prices,dp); //0-->buy 1-->sell
+        vector<vector<long long>> dp(n+1,vector<long long>(2,0));
+        dp[n][0]=0,dp[n][1]=0; //base case
+        //now iteration sholud be written backward like n->1
+        for(int i=n-1;i>=0;i--){
+            for(int j=0;j<=1;j++){
+                
+                 if(j==0){
+            int buy=-prices[i]+dp[i+1][1];
+            int not_buy=dp[i+1][0];
+                dp[i][j]=max(buy,not_buy);
+                         }
+               else if(j==1){
+            int sell=prices[i]+dp[i+1][0];
+            int not_sell=dp[i+1][1];
+               dp[i][j]=max(sell,not_sell);
+                       }
+            }
+        }
+        return dp[0][0];
     }
 };
 
