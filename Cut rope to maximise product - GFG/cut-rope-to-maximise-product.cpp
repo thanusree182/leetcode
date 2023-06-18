@@ -31,10 +31,10 @@ public:
         }
         else{
           
-                solve(1LL*n,dp);
+            return solve(1LL*n,dp);
             
         }
-        return dp[n];
+       
     }
 };
 
