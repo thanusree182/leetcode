@@ -15,22 +15,18 @@ class Solution
     int peakElement(int arr[], int n)
     {
        // Your code here
-       for(int i=0;i<n;i++){
-       if(i==0){
-           if(arr[0]>=arr[1]){
-               return 0;
+       int s=0;
+       int e=n-1;
+       while(s<e){
+           int m=(s+(e-s)/2);
+           if(arr[m]<arr[m+1]){
+               s=m+1;
+           }
+           else{
+               e=m;
            }
        }
-       if(i==n-1){
-           if(arr[n-1]>=arr[n-2]){
-               return n-1;
-           }
-       }
-       if(arr[i]>=arr[i-1] && arr[i]>=arr[i+1]){
-           return i;
-       }
-       }
-       return 0;
+       return s;
     }
 };
 
