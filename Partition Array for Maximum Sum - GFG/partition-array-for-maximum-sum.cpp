@@ -5,28 +5,26 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
     public:
-    int help(int ind,int n,int k,vector<int>& arr,vector<int>& dp){
-        if(ind==n){
-            return 0;
-        }
-        if(dp[ind]!=-1){
-            return dp[ind];
-        }
-        int maxi=INT_MIN;
-        int len=0;
-        int maxians=INT_MIN;
-        for(int i=ind;i<min(n,ind+k);i++){
-            len++;
-            maxi=max(maxi,arr[i]);
-            int sum=(maxi*len)+help(i+1,n,k,arr,dp);
-            maxians=max(maxians,sum);
-        }
-        return dp[ind]=maxians;
-    }
+   
     int solve(int n, int k, vector<int>& arr){
         // Code here
-        vector<int> dp(n,-1);
-       return help(0,n,k,arr,dp);
+        vector<int> dp(n+1,-1);
+        
+      
+       dp[n]=0;
+       for(int i=n-1;i>=0;i--){
+           int maxi=INT_MIN;
+           int len=0;
+        int maxians=INT_MIN;
+           for(int j=i;j<min(n,i+k);j++){
+               len++;
+            maxi=max(maxi,arr[j]);
+            int sum=(maxi*len)+dp[j+1];
+            maxians=max(maxians,sum);
+           }
+           dp[i]=maxians;
+       }
+       return dp[0];
     }
 };
 
