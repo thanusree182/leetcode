@@ -9,6 +9,7 @@ using namespace std;
 
 class Solution{
     public:
+    // follow->up  //if largest string appearing before shortest or cyclic dependency exists then dictionary not possible
     vector<int> topoSort(int V, vector<int> adj[])
 	{
 		int indegree[V] = {0};
