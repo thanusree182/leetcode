@@ -11,28 +11,30 @@ class Solution
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
         // Code here
-        //dijkstra using priority queue
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
-        vector<int> dist(V);
-        for(int i=0;i<V;i++){
-            dist[i]=1e9;
-        }
-        dist[S]=0;
-        pq.push({0,S});
-        while(!pq.empty()){
-            int dis=pq.top().first;
-            int node=pq.top().second;
-            pq.pop();
-            for(auto it:adj[node]){
-                int edge_weight=it[1];
-                int adjNode=it[0];
-                if(dis+edge_weight<dist[adjNode]){
-                    dist[adjNode]=dis+edge_weight;
-                    pq.push({dist[adjNode],adjNode});
+        //using set in set if better distance is found along with updating dist array we can erase it from set also
+        //but we cannot guarantee set has better tc than priority queue becasue erase in set takes O(logn) tc
+        set<pair<int,int>> s;
+        vector<int> dis(V,1e9);
+        s.insert({0,S});
+        dis[S]=0;
+        while(!s.empty()){
+            auto it=*(s.begin());
+            int node=it.second;
+            int dist=it.first;
+            s.erase(it);
+            for(auto i:adj[node]){
+                int adjNode=i[0];
+                int edge_weight=i[1];
+                if(dist+edge_weight<dis[adjNode]){
+                    if(dis[adjNode]!=1e9){
+                        s.erase({dis[adjNode],adjNode}); //differenece  in pq and s
+                    }
+                    dis[adjNode]=dist+edge_weight;
+                    s.insert({dis[adjNode],adjNode});
                 }
             }
         }
-        return dist;
+        return dis;
     }
 };
 
