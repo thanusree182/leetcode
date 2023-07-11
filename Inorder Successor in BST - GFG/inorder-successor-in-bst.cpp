@@ -116,7 +116,7 @@ class Solution{
         
         Node* ans=NULL;
         while(root!=NULL){
-            if(root->data>x->data){
+            if(root->data>x->data){ //as inorder in bst values greater than target have chance to be succesor
                 ans=root;
                 root=root->left;
             }
