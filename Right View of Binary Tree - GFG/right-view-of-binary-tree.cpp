@@ -41,22 +41,23 @@ class Solution
 {
     public:
     //Function to return list containing elements of right view of binary tree.
+    void solve(Node* root,vector<int>& ans,int level){
+        if(root==NULL)
+        return;
+        if(ans.size()==level){
+            ans.push_back(root->data);
+        }
+        solve(root->right,ans,level+1);
+        solve(root->left,ans,level+1);
+    
+    }
     vector<int> rightView(Node *root)
     {
        // Your Code here
        vector<int> ans;
-       func(root,0,ans);
+       solve(root,ans,0);
+       
        return ans;
-    }
-    void func(Node* root,int l,vector<int>& ans){
-        if(root==NULL){
-            return;
-        }
-        if(ans.size()==l){
-            ans.push_back(root->data);
-        }
-        func(root->right,l+1,ans);
-        func(root->left,l+1,ans);
     }
 };
 
