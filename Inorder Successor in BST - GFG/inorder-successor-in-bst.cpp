@@ -113,10 +113,9 @@ class Solution{
     Node * inOrderSuccessor(Node *root, Node *x)
     {
         //Your code here
-        
         Node* ans=NULL;
         while(root!=NULL){
-            if(root->data>x->data){ //as inorder in bst values greater than target have chance to be succesor
+            if(root->data>x->data){
                 ans=root;
                 root=root->left;
             }
@@ -124,7 +123,6 @@ class Solution{
                 root=root->right;
             }
         }
-        
         return ans;
     }
 };
