@@ -10,24 +10,26 @@ using namespace std;
 
 class Solution{
 public:
-    void inserti(stack<int>& s,int a){
-        if(s.empty()){
-            s.push(a);
-        }
-        else{
-            int b=s.top();
-            s.pop();
-            inserti(s,a);
-            s.push(b);
-        }
-    }
     void Reverse(stack<int> &St){
-       if(!St.empty()){
-           int a=St.top();
-           St.pop();
-           Reverse(St);
-           inserti(St,a);
-       }
+        if(St.size()==1)
+        return;
+        int top=St.top();
+        St.pop();
+        Reverse(St);
+        Insert(St,top);
+    }
+    void Insert(stack<int>& s,int top){
+        if(s.empty())
+        {
+            s.push(top);  //if single elemnt just push into stack
+            return;
+        }
+        int temp=s.top();
+        s.pop();                      //else remove all elements and push above element and then push poppe delements 
+        Insert(s,top);    
+        s.push(temp);
+        
+        return;
     }
 };
 
