@@ -9,33 +9,29 @@ using namespace std;
 
 class Solution{
   public:
-    int longestKSubstr(string s, int K) {
+    int longestKSubstr(string s, int k) {
     // your code here
-    int ans=0;
-    int i=0,j=0;
-    int n=s.length();
     unordered_map<char,int> mp;
-       while(i<n && j<n){
-           mp[s[j]]++;
-           if(mp.size()>K){
-               while(mp.size()>K && i<j){
-                   mp[s[i]]--;
-                   
-                   if(mp[s[i]]==0){
-                       mp.erase(s[i]);
-                   }
-                   i++;
-               }
-           }
-           if(mp.size()==K){
-               ans=max(ans,(j-i+1));
-           }
-           j++;
-       }
-       if(ans==0)
-       return -1;
-       else
-       return ans;
+    int j=0;
+    int maxi=-1;
+    for(int i=0;i<s.length();i++){
+        mp[s[i]]++;
+        if(mp.size()==k){
+            maxi=max(maxi,(i-j+1));
+        }
+        else if(mp.size()>k){
+            while(mp.size()>k){
+                mp[s[j]]--;
+            
+            if(mp[s[j]]==0){
+                mp.erase(s[j]);
+            }
+             j++;
+            }
+        }
+    }
+    
+    return maxi;
     }
 };
 
