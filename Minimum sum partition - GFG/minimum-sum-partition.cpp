@@ -6,37 +6,45 @@ using namespace std;
 class Solution{
 
   public:
+  
+  int solve(int nums[],int i,int target,vector<vector<int>>& dp){
+        if(target==0)
+        return 1;
+        if(i<0)
+        return 0;
+        if(dp[i][target]!=-1)
+        return dp[i][target];
+        int take=0;
+if(target>=(nums[i])){
+    take=solve(nums,i-1,target-nums[i],dp);
+}
+int not_take=solve(nums,i-1,target,dp);
+
+return dp[i][target]=take||not_take;
+    }
 	int minDifference(int arr[], int n)  { 
 	    // Your code goes here
-	    int total_sum=0;
-	    for(int i=0;i<n;i++){
-	        total_sum+=arr[i];
-	    }
-	    vector<vector<bool>> dp(n,vector<bool>(total_sum+1,false));
-	    for(int i=0;i<n;i++){
-	        dp[i][0]=true;
-	    }
-	    if(arr[0]<=total_sum){
-	    dp[0][total_sum]=true;
-	    }
-	    for(int ind=1;ind<n;ind++){
-	        for(int t=1;t<=total_sum;t++){
-	            bool not_take=dp[ind-1][t];
-	            bool take=false;
-	            if(t>=arr[ind]){
-	                take=dp[ind-1][t-arr[ind]];
-	            }
-	            dp[ind][t]=take || not_take;
-	        }
-	        
-	    }
-	    int mini=1e9;
-	    for(int i=0;i<=total_sum;i++){
-	        if(dp[n-1][i]==true){
-	            mini=min(mini,abs((total_sum-i)-i));
-	        }
-	    }
-	    return mini;
+	    int totSum = 0;
+
+  for (int i = 0; i < n; i++) {
+    totSum += arr[i];
+  }
+
+  vector < vector < int >> dp(n, vector < int > (totSum + 1, -1));
+
+  for (int i = 0; i <= totSum; i++) {
+    bool dummy = solve(arr,n - 1, i, dp);
+  }
+
+  int mini = 1e9;
+  for (int i = 0; i <= totSum; i++) {
+    if (dp[n - 1][i] == true) {
+      int diff = abs(i - (totSum - i));
+      mini = min(mini, diff);
+    }
+  }
+  return mini;
+    
 	} 
 };
 
