@@ -5,26 +5,27 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
 public:
-    vector<vector<int>> dfs(vector<vector<int>>& image, int sr, int sc, int newColor,int initial_color,int dr[],int dc[],vector<vector<int>>& ans){
+    void dfs(vector<vector<int>>& image,int sr,int sc,int newColor,int initial_color,int dr[],int dc[],vector<vector<int>>& ans)
+    {
         ans[sr][sc]=newColor;
         int n=image.size();
         int m=image[0].size();
         for(int i=0;i<4;i++){
             int newr=sr+dr[i];
             int newc=sc+dc[i];
-            if(newr>=0 && newr<n && newc>=0 && newc<m && image[newr][newc]==initial_color && ans[newr][newc]!=newColor ){
+            if(newr>=0 && newr<n && newc>=0 && newc<m && image[newr][newc]==initial_color && ans[newr][newc]!=newColor){
                 dfs(image,newr,newc,newColor,initial_color,dr,dc,ans);
             }
         }
-        return ans;
     }
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
-        // Code here
+        // Code here 
         vector<vector<int>> ans=image;
         int initial_color=image[sr][sc];
         int dr[]={0,-1,0,1};
         int dc[]={-1,0,1,0};
-        return dfs(image,sr,sc,newColor,initial_color,dr,dc,ans);
+         dfs(image,sr,sc,newColor,initial_color,dr,dc,ans);
+         return ans;
     }
 };
 
