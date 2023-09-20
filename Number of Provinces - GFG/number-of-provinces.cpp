@@ -8,29 +8,23 @@ using namespace std;
 
 class Solution {
   public:
-    void bfs(int node,vector<vector<int>>& adj,int v,vector<int>& vis){
-        queue<int> q;
-        q.push(node);
-        while(!q.empty()){
-            int top=q.front();
-            q.pop();
-            vis[top]=1;
-            for(int i=0;i<v;i++){
-                if(vis[i]==0 && adj[top][i]==1 ){
-                    q.push(i);
-                    vis[i]=1;
-                }
+    void solve(int i,vector<vector<int>>& adj,int V,vector<int>& vis){
+        vis[i]=1;
+        for(int j=0;j<V;j++){
+            if(adj[i][j]==1 && vis[j]==0){
+                solve(j,adj,V,vis);
             }
         }
     }
     int numProvinces(vector<vector<int>> adj, int V) {
         // code here
-        vector<int> vis(V,0);
+        
+        vector<int> vis(V+1,0);
         int count=0;
         for(int i=0;i<V;i++){
-            if(vis[i]==0){
+            if(!vis[i]){
                 count++;
-                bfs(i,adj,V,vis);
+                solve(i,adj,V,vis);
             }
         }
         return count;
