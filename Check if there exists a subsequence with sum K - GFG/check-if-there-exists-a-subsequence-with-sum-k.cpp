@@ -12,7 +12,7 @@ class Solution{
         bool notpick=solve(i-1,tar,arr,dp);
         bool pick=0;
         if(tar>=arr[i]) pick=solve(i-1, tar-arr[i],arr,dp);
-        return dp[i][tar]=pick || notpick;
+        return dp[i][tar]=max(pick,notpick);
     }
    
     bool checkSubsequenceSum(int n, vector<int>& arr, int k) {
