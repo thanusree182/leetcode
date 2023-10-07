@@ -40,11 +40,17 @@ class Solution
         // The task is to complete this method
         if(head==NULL || head->next==NULL)
         return head;
-       struct Node* temp=head->next;
-       head->next=pairWiseSwap(head->next->next);
-       temp->next=head;
-       
-       return temp;
+        struct Node* dummy= new Node(-1);
+        struct Node* prev=dummy;
+        struct Node* curr=head;
+        while(curr!= NULL && curr->next!=NULL){
+            prev->next=curr->next;
+            curr->next=curr->next->next;
+            prev->next->next=curr;
+            curr=curr->next;
+            prev=prev->next->next;
+        }
+        return dummy->next;
     }
 };
 
