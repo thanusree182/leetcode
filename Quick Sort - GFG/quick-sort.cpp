@@ -21,9 +21,9 @@ class Solution
     {
         // code here
         if(low<high){
-            int partition_index=partition(arr,low,high);
-            quickSort(arr,low,partition_index-1);
-            quickSort(arr,partition_index+1,high);
+            int part=partition(arr,low,high);
+            quickSort(arr,low,part-1);
+            quickSort(arr,part+1,high);
         }
     }
     
@@ -32,17 +32,17 @@ class Solution
     {
        // Your code here
       int pivot=arr[low];
-      int i=low,j=high;
-      while(i<=j){
-          while(arr[i]<=pivot && i<=high){
+      int i=low;
+      int j=high;
+      while(i<j){
+          while(arr[i]<=pivot && i<=high-1){
               i++;
           }
-          while(arr[j]>pivot && j>=low){
+          while(arr[j]>pivot && j>=low+1){
               j--;
           }
-          if(i<j){
-              swap(arr[i],arr[j]);
-          }
+          if(i<j)
+          swap(arr[i],arr[j]);
       }
       swap(arr[low],arr[j]);
       return j;
